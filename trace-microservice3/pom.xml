@@ -11,7 +11,7 @@
 
 	<groupId>com.poc.microservice</groupId>
 	<artifactId>trace-microservice3</artifactId>
-	<name>microservice2</name>
+	<name>trace-microservice3</name>
 	<description>Demo project for Spring Boot</description>
 	
 	<properties>
