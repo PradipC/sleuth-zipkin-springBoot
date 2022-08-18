@@ -22,10 +22,30 @@ public class Microservice3Controller {
 		log.info("Inside method3");
 		String baseUrl = "http://localhost:9084/microservice4";
 		String response = (String) restTemplate.exchange(baseUrl, HttpMethod.GET, null, String.class).getBody();
-		log.info("The response received by method2 is " + response);
+		log.info("The response received by method3 is " + response);
 		return response;
 	}
 	
+	
+	
+	@GetMapping(value = "/microservice3/delay")
+	public String delayMethod() {
+
+		log.info("Inside delayMethod method in Microservice3Controller ");
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			log.error("InterruptedException is : "+e.getMessage());
+			e.printStackTrace();
+		}
+		
+		String baseUrl = "http://localhost:9084/microservice4/delay";
+		String response = (String) restTemplate.exchange(baseUrl, HttpMethod.GET, null, String.class).getBody();
+		log.info("The response received by delay method is " + response);
+		return response;
+
+	}
 	
 	
 }

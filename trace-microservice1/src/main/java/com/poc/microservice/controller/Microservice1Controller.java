@@ -15,7 +15,6 @@ public class Microservice1Controller {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	
 	@GetMapping(value = "/microservice1")
 	public String method1() {
 		log.info("Inside method1");
@@ -25,6 +24,41 @@ public class Microservice1Controller {
 		return response;
 	}
 	
+	
+	@GetMapping(value = "/microservice1/circuit-breaker")
+	public String cbMethod1() {
+		
+		log.info("Inside circuit breaker method in Microservice1Controller ");
+		String baseUrl = "http://localhost:9082/microservice2/circuit-breaker";
+		String response = (String) restTemplate.exchange(baseUrl, HttpMethod.GET, null, String.class).getBody();
+		log.info("The response received by circuit breaker  method is " + response);
+		return response;
+		
+	}
+	
+	
+	@GetMapping(value = "/microservice1/circuit-breaker/retry")
+	public String cbMethod1Retry() {
+		
+		log.info("Inside circuit breaker retry in Microservice1Controller ");
+		String baseUrl = "http://localhost:9082/microservice2/circuit-breaker/retry";
+		String response = (String) restTemplate.exchange(baseUrl, HttpMethod.GET, null, String.class).getBody();
+		log.info("The response received by circuit breaker retry method is " + response);
+		return response;
+		
+	}
+	
+	
+	@GetMapping(value = "/microservice1/delay")
+	public String delayMethod() {
+		
+		log.info("Inside delayMethod method in Microservice1Controller ");
+		String baseUrl = "http://localhost:9082/microservice2/delay";
+		String response = (String) restTemplate.exchange(baseUrl, HttpMethod.GET, null, String.class).getBody();
+		log.info("The response received by delay method is " + response);
+		return response;
+		
+	}
 	
 	
 }
